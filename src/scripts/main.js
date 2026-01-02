@@ -1,6 +1,14 @@
 'use strict';
 
 const tbody = document.querySelector('tbody');
+let nextId = 1;
+
+tbody.querySelectorAll('tr').forEach((tr) => {
+  if (!tr.dataset.id) {
+    tr.dataset.id = String(nextId++);
+  }
+});
+
 let activeRow = null;
 
 // selecting logic
@@ -20,6 +28,10 @@ tbody.addEventListener('click', (e) => {
     activeRow = null;
 
     return;
+  }
+
+  if (activeRow && activeRow !== row) {
+    activeRow.classList.remove('active');
   }
 
   row.classList.add('active');
@@ -120,8 +132,12 @@ function renderTableFromData(data) {
   data.forEach((item) => {
     const tr = document.createElement('tr');
 
-    if (item.id != null) {
-      tr.dataset.id = item.id;
+    const id = item.id != null ? String(item.id) : String(nextId++);
+
+    tr.dataset.id = id;
+
+    if (item.id == null) {
+      item.id = id;
     }
 
     const tdName = document.createElement('td');
@@ -315,6 +331,8 @@ form.addEventListener('submit', (e) => {
     } else {
       td.textContent = value;
     }
+
+    tr.dataset.id = String(nextId++);
 
     tr.appendChild(td);
   });
