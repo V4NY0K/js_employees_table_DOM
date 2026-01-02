@@ -323,6 +323,8 @@ form.addEventListener('submit', (e) => {
 
   const headers = [workerName, position, office, String(age), salary];
 
+  tr.dataset.id = String(nextId++);
+
   headers.forEach((value, i) => {
     const td = document.createElement('td');
 
@@ -334,8 +336,6 @@ form.addEventListener('submit', (e) => {
 
     tr.appendChild(td);
   });
-
-  tr.dataset.id = String(nextId++);
 
   tbody.appendChild(tr);
 
