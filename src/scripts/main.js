@@ -332,10 +332,10 @@ form.addEventListener('submit', (e) => {
       td.textContent = value;
     }
 
-    tr.dataset.id = String(nextId++);
-
     tr.appendChild(td);
   });
+
+  tr.dataset.id = String(nextId++);
 
   tbody.appendChild(tr);
 
